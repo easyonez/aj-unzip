@@ -15,7 +15,7 @@ class TarExtractor implements ExtractorInterface {
             }
             $archive->extractTo($destination, null, true);
             return true;
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             echo "Errore tar: " . $e->getMessage() . "\n";
             return false;
         }

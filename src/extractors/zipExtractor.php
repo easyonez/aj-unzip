@@ -4,22 +4,27 @@ namespace AjUnzip\Extractors;
 
 use AjUnzip\ExtractorInterface;
 use ZipArchive;
+use Exception;
 
 class ZipExtractor implements ExtractorInterface {
     public function extract(string $source, string $destination): bool {
-        $zip = new ZipArchive();
-        
-        if ($zip->open($source) === TRUE) {
-            if (!is_dir($destination)) {
-                mkdir($destination, 0777, true);
+        try {
+            $zip = new ZipArchive();
+            if ($zip->open($source) === TRUE) {
+                if (!is_dir($destination)) {
+                    mkdir($destination, 0777, true);
+                }
+                
+                $result = $zip->extractTo($destination);
+                $zip->close();
+                return $result;
             }
-            
-            $result = $zip->extractTo($destination);
-            $zip->close();
-            return $result;
+            return false;
         }
-        
-        return false;
+        catch (\Exception $e) {
+            echo "Errore zip: " . $e->getMessage() . "\n";
+            return false;
+        }
     }
 }
 ?>

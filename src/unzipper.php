@@ -17,7 +17,6 @@ class Unzipper {
         }
 
         echo "Inizio estrazione file: $filePath...\n";
-        
         $success = $this->Extractors[$extension]->extract($filePath, $destination);
 
         if ($success) {
