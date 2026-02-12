@@ -1,0 +1,5 @@
+/zzz
+build_phar.php
+composer.lock
+/.box_dump
+/vendor
