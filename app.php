@@ -11,11 +11,29 @@ use AjUnzip\Extractors\SevenZipExtractor;
 
 $app = new Unzipper();
 
+$filePath = $argv[1] ?? null;
+
+if (!$filePath) {
+    die("Use: php app.php <file> [-u [path]]\n");
+}
+
+$destination = './';
+$uFLag = array_search('-u', $argv);
+if ($uFLag !== false) {
+    if (isset($argv[$uFLag + 1])) {
+        $destination = $argv[$uFLag + 1];
+    }
+} else {
+    $fileName = preg_replace('/\.[^.]+$/', '', basename($filePath));
+    $destination .= $fileName;
+}
+
+// Extractors Register
 $app->registerExtractor('zip', new ZipExtractor());
 $app->registerExtractor('gz', new GzExtractor());
 $app->registerExtractor('tar', new TarExtractor());
 $app->registerExtractor('7z', new SevenZipExtractor());
 $app->registerExtractor('rar', new RarExtractor());
 
-$app->run($argv[1]);
+$app->run($argv[1], $destination);
 ?>
