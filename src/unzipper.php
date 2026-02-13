@@ -10,19 +10,21 @@ class Unzipper {
     }
 
     public function run(string $filePath, string $destination): void {
+        $fileName = basename($filePath);
         $extension = pathinfo($filePath, PATHINFO_EXTENSION);
-
         if (!isset($this->Extractors[$extension])) {
-            throw new \Exception("ERROR: format .$extension not supported.");
+            echo "ERROR: format .$extension not supported\n";
+            // throw new \Exception("ERROR: format .$extension not supported."); NEED TO SEE THIS BETTER
+            return;
         }
 
-        echo "Starting with file extraction: $filePath...\n";
+        echo "LOADING: Starting extraction of $fileName in $destination\n";
         $success = $this->Extractors[$extension]->extract($filePath, $destination);
 
         if ($success) {
-            echo "Extraction completed with success in: $destination\n";
+            echo "COMPLETE: Extraction completed with success in: $destination\n";
         } else {
-            echo "ERROR: Problem during the extraction.\n";
+            echo "ERROR: Problem during the extraction\n";
         }
     }
 }
