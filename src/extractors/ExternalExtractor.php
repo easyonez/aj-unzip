@@ -17,8 +17,8 @@ abstract class ExternalExtractor implements ExtractorInterface {
         exec("$whereCommand $binary", $output, $returnCode);
         if ($returnCode !== 0) {
             throw new \Exception(
-                "ERRORE: The format requires the 'utility '$binary'. \n" .
-                "Please, install it or add it to the system's PATH."
+                "ERRORE: The format requires the 'utility '$binary' \n" .
+                "Please, install it or add it to the system's PATH\n"
             );
         }
     }
