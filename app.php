@@ -17,5 +17,5 @@ $app->registerExtractor('tar', new TarExtractor());
 $app->registerExtractor('7z', new SevenZipExtractor());
 $app->registerExtractor('rar', new RarExtractor());
 
-$app->run($argv[1], './output');
+$app->run($argv[1]);
 ?>

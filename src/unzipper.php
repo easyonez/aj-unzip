@@ -9,7 +9,10 @@ class Unzipper {
         $this->Extractors[strtolower($extension)] = $Extractor;
     }
 
-    public function run(string $filePath, string $destination): void {
+    public function run(string $filePath): void {
+        $fileName = basename($filePath);
+        $destination = preg_replace('/\.[^.]+$/', '', $fileName);
+        
         $extension = pathinfo($filePath, PATHINFO_EXTENSION);
 
         if (!isset($this->Extractors[$extension])) {
