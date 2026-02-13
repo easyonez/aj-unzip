@@ -22,7 +22,7 @@ class ZipExtractor implements ExtractorInterface {
             return false;
         }
         catch (\Exception $e) {
-            echo "Errore zip: " . $e->getMessage() . "\n";
+            echo "ERROR zip: " . $e->getMessage() . "\n";
             return false;
         }
     }

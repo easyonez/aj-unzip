@@ -13,16 +13,16 @@ class Unzipper {
         $extension = pathinfo($filePath, PATHINFO_EXTENSION);
 
         if (!isset($this->Extractors[$extension])) {
-            throw new \Exception("Errore: Formato .$extension non supportato.");
+            throw new \Exception("ERROR: format .$extension not supported.");
         }
 
-        echo "Inizio estrazione file: $filePath...\n";
+        echo "Starting with file extraction: $filePath...\n";
         $success = $this->Extractors[$extension]->extract($filePath, $destination);
 
         if ($success) {
-            echo "Estrazione completata con successo in: $destination\n";
+            echo "Extraction completed with success in: $destination\n";
         } else {
-            echo "Si è verificato un errore durante l'estrazione.\n";
+            echo "ERROR: Problem during the extraction.\n";
         }
     }
 }

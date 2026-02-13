@@ -1,5 +1,7 @@
 ## Description
 soon.
+## Needs
+- If you want to use decompress **7z** or **Rar** files you need **7-Zip** installed in your computer.
 ## Installation
 soon.
 ## Built With

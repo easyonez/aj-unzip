@@ -1,29 +1,19 @@
 <?php
 
 namespace AjUnzip\Extractors;
+
+use AjUnzip\Extractors\ExternalExtractor;
 use AjUnzip\ExtractorInterface;
 
-use Archive7z\Archive7z;
-
-class SevenZipExtractor implements ExtractorInterface {
-    public function extract(string $source, string $destination): bool {
-        try {
-            if (!is_dir($destination)) {
-                mkdir($destination, 0777, true);
-            }
-
-            $archive = new Archive7z($source);
-            if (!$archive->isValid()) {
-                return false;
-            }
-            $archive->setOutputDirectory($destination);
-            $archive->extract();
-            
-            return true;
-        } catch (\Exception $e) {
-            echo "Errore 7z: " . $e->getMessage() . "\n";
-            return false;
-        }
+class SevenZipExtractor extends ExternalExtractor {
+    protected function getCommand(string $source, string $destination): string {
+        return sprintf('7z x "%s" -o "%s" -y', $source, $destination);
+    }
+    protected function getBinaryName(): string {
+        return "7z";
+    }
+    protected function getFormat(): string {
+        return "7z";
     }
 }
 ?>

@@ -27,7 +27,7 @@ class GzExtractor implements ExtractorInterface {
             fclose($out);
             return file_exists($outputFile);
         } catch (\Exception $e) {
-            echo "Errore Gz: " . $e->getMessage() . "\n";
+            echo "ERROR Gz: " . $e->getMessage() . "\n";
             return false;
         }
     }
